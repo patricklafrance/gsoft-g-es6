@@ -1,0 +1,23 @@
+{
+	"unused": true,
+	"undef": true,
+	"bitwise": true,
+	"browser": true,
+	"curly": true,
+	"jquery": true,
+	"noarg": true,
+	"noempty": true,
+	"nonew": true,
+	"devel": true,
+	"plusplus": true,
+	"sub": true,
+	"predef": [
+		"window", "global", "console",
+        "define", "require", "exports", "module",
+        "phantom",
+		"jasmine", "describe", "it", "beforeEach", "afterEach", "expect", "spyOn", "jasmineReporters", "test",
+        "gulp",
+        "ko", "koViewModel", "Path",
+		"gsoft", "g", "_"
+	]
+}

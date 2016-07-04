@@ -1,0 +1,4 @@
+# Generated folders
+dist
+node_modules
+tests/specifications

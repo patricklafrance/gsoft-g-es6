@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="shortcut icon" type="image/png" href="../../../external/jasmine/jasmine_favicon.png">
+        
+	    <title>gsoft.js library tests</title>
+
+        <!-- Require JS -->
+        <script src="../../../external/require-js/require.js" type="text/javascript"></script>
+        <script>
+            require.config({ 
+                baseUrl: "../../../dist/core"
+            });
+        </script>
+        
+        <!-- Jasmine -->
+        <link href="../../../external/jasmine/jasmine.css" rel="stylesheet" type="text/css" />
+        <script src="../../../external/jasmine/jasmine.js" type="text/javascript"></script>
+	    <script src="../../../external/jasmine/jasmine-html.js" type="text/javascript"></script>
+	    <script src="../../../external/jasmine/boot.js" type="text/javascript"></script>
+        
+        <!-- Specifications -->
+        <script src="require-js.specifications.js" type="text/javascript"></script>
+
+        <!-- Phantom -->
+        <script src="../../phantom/reporter.console.js" type="text/javascript"></script>
+        <script src="../../phantom/reporter.teamcity.js" type="text/javascript"></script>
+        <script src="../../phantom/reporter.visualstudio.js" type="text/javascript"></script>
+        <script src="../../phantom/setup.js" type="text/javascript"></script>
+	</head>
+	<body>
+	</body>
+</html>

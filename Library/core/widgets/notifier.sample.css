@@ -1,0 +1,36 @@
+﻿.g-notifier-loading-overlay {
+    background-color: #666;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    cursor: wait;
+}
+.g-notifier-loading {
+    padding: 20px 30px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    cursor: wait;
+}
+.g-notifier-error-overlay {
+    background-color: #666;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+}
+.g-notifier-error {
+    padding: 20px 30px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+.g-notifier-saving {
+    padding: 20px 30px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+.g-notifier-saved {
+    padding: 20px 30px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
