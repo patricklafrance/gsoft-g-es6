@@ -15,24 +15,9 @@ global.tests.specifications.core = {
     filename: "core.specifications.js",
     sources: [
         "tests/core/utils.js",
-        "tests/core/string.js",
-        "tests/core/array.js",
         "tests/core/error.js",
         "tests/core/ensure.js",
-        "tests/core/date.js",
-        "tests/core/namespace.js",
-        "tests/core/noconflict.js",
         "tests/core/mediator.js"
-    ]
-};
-
-global.tests.specifications.core.legacy = {
-    filename: "core.legacy.specifications.js",
-    sources: [
-        "tests/core/legacy/utils.js",
-        "tests/core/legacy/ensure.js",
-        "tests/core/legacy/date.js",
-        "tests/core/legacy/mediator.js"
     ]
 };
 

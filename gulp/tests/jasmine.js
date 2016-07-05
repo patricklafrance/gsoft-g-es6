@@ -10,7 +10,6 @@ var gulp = require("gulp");
 gulp.task("jasmine", function(callback) {
     sequence("clean-specifications", 
          "bundle-core-specifications", 
-         "bundle-core-legacy-specifications",
          "bundle-core-widgets-specifications", 
          "bundle-bindings-specifications", 
          "bundle-observableArray-specifications", 
@@ -19,9 +18,6 @@ gulp.task("jasmine", function(callback) {
          "bundle-spa-es6-specifications",
          "bundle-spa-services-specifications",
          "jasmine-core", 
-         "jasmine-core-with-shims", 
-         "jasmine-core-legacy", 
-         "jasmine-core-legacy-with-shims",
          "jasmine-core-widgets", 
          "jasmine-bindings",
          "jasmine-debugging",
@@ -35,7 +31,6 @@ gulp.task("jasmine", function(callback) {
 gulp.task("jasmine-dev", function(callback) {
     sequence("clean-specifications", 
          "bundle-core-specifications", 
-         "bundle-core-legacy-specifications", 
          "bundle-core-widgets-specifications", 
          "bundle-bindings-specifications", 
          "bundle-observableArray-specifications", 
@@ -44,7 +39,6 @@ gulp.task("jasmine-dev", function(callback) {
          "bundle-spa-es6-specifications",
          "bundle-spa-services-specifications",
          "jasmine-core", 
-         "jasmine-core-legacy", 
          "jasmine-core-widgets",
          "jasmine-bindings", 
          "jasmine-debugging",

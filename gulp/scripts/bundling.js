@@ -9,7 +9,6 @@ var gulp = require("gulp");
 
 gulp.task("bundle-debug", function(callback) {
     sequence("bundle-core-scripts-debug", 
-             "bundle-core-legacy-scripts-debug", 
              "bundle-core-widgets-scripts-debug",
              "bundle-bindings-scripts-debug", 
              "bundle-observable-array-scripts-debug", 
@@ -23,7 +22,6 @@ gulp.task("bundle-debug", function(callback) {
 
 gulp.task("bundle-release", function(callback) {
     sequence("bundle-core-scripts-release", 
-             "bundle-core-legacy-scripts-release", 
              "bundle-core-widgets-scripts-release",
              "bundle-bindings-scripts-release", 
              "bundle-observable-array-scripts-release", 

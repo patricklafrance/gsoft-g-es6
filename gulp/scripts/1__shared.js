@@ -16,33 +16,14 @@ global.scripts.files.core = {
     sources: [
         "library/core/privates.js",
         "library/core/metadata.js",
-        "library/core/shims.js",
         "library/core/utils.js",
-        "library/core/string.js",
-        "library/core/array.js",
         "library/core/error.js",
         "library/core/ensure.js",
-        "library/core/date.js",
-        "library/core/namespace.js",
         "library/core/mediator.js"
     ],
     fragments: {
         pre: ["library/core/fragments/notes.js", "library/core/fragments/export.js", "library/core/fragments/intro.js"],
 		post: ["library/core/fragments/outro.js"]
-    }
-};
-
-global.scripts.files.core.legacy = {
-    sources: [
-        "library/core/legacy/jquery.js",
-        "library/core/legacy/utils.js",
-        "library/core/legacy/ensure.js",
-        "library/core/legacy/date.js",
-        "library/core/legacy/mediator.js"
-    ],
-    fragments: {
-        pre: ["library/core/legacy/fragments/notes.js", "library/core/legacy/fragments/intro.js"],
-		post: ["library/core/legacy/fragments/outro.js"]
     }
 };
 

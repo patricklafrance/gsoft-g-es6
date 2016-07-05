@@ -9,7 +9,6 @@ var jscs = require("gulp-jscs");
 var f = global.scripts.files;
 
 var files = f.core.sources
-    .concat(f.core.legacy.sources)
     .concat(f.knockout.bindings.sources)
     .concat(f.knockout.debugging.sources)
     .concat(f.knockout.observableArray.sources)

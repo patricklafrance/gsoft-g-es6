@@ -225,13 +225,17 @@
         }
     };
     
-    if (!utils.isUndefined(Array.isArray) && !gsoft.forceShims) {
-        // The assertion is done with the native JavaScript Array object which support this feature 
-        // since the JavaScript 1.8.5 (ECMAScript 5) specifications.
-        utils.isArray = function(value) {
-            return Array.isArray(value);
-        };
-    }
+    // ********  TO DELETE ****************** 
+
+    // if (!utils.isUndefined(Array.isArray) && !gsoft.forceShims) {
+    //     // The assertion is done with the native JavaScript Array object which support this feature 
+    //     // since the JavaScript 1.8.5 (ECMAScript 5) specifications.
+    //     utils.isArray = function(value) {
+    //         return Array.isArray(value);
+    //     };
+    // }
+
+    // ********  /TO DELETE ****************** 
     
     if (_.isBrowser()) {
         // summary:
