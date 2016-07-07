@@ -7,6 +7,50 @@
     // an "Array like" it doesn't implements the native array manipulation functions.
     var unshift = Array.prototype.unshift;
 
+    gsoft._ensure = function(assertions, parameter, parameterName, context) {
+        var result = {};
+
+        var getAssertionProxy = function(property) {
+            return function() {
+                unshift.apply(arguments, [parameter, parameterName, context]);
+
+                return property.apply(result, arguments);
+            };
+        };
+        
+        // Wrap all the assertions to append the default arguments to the function arguments.
+        utils.objectForEach(assertions, function(assertion, assertionKey) {
+            result[assertionKey] = getAssertionProxy(assertion);
+        });
+
+        return result;
+    };
+
+    // summary:
+    //         Build an error message.
+    // description:
+    //         Build an error message. 
+    //         For the default message format:
+    //              {0} is the context of the call to ensure
+    //              {1} is the parameter name
+    var getMessage = gsoft._ensure.getMessage = function(assertionMessage, defaultMessageTemplate, parameterName, context) {
+        var message = assertionMessage;
+
+        if (utils.isNullOrEmpty(message)) {
+            message = _.formatString(defaultMessageTemplate,
+                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
+                utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
+        }
+
+        if (utils.isNullOrEmpty(message)) {
+            message = _.formatString(defaultMessageTemplate,
+                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
+                utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
+        }
+
+        return message;
+    };
+
     // summary:
     //         Ensure that a @parameter respect the specified assertions.
     // description:
@@ -24,47 +68,7 @@
     // example:
     //         gsoft.ensure(parameter, "Optional parameter name", "Optional context").isNotNull("Optional specific message").isNotEmpty();
     var ensure = gsoft.ensure = function(parameter, parameterName, context) {
-        var assertions = {};
-
-        var getAssertionProxy = function(property) {
-            return function() {
-                unshift.apply(arguments, [parameter, parameterName, context]);
-
-                return property.apply(assertions, arguments);
-            };
-        };
-        
-        // Wrap all the assertions to append the default arguments to the function arguments.
-        utils.objectForEach(gsoft.ensure.assertions, function(assertion, assertionKey) {
-            assertions[assertionKey] = getAssertionProxy(assertion);
-        });
-
-        return assertions;
-    };
-        
-    // summary:
-    //         Build an error message.
-    // description:
-    //         Build an error message. 
-    //         For the default message format:
-    //              {0} is the context of the call to ensure
-    //              {1} is the parameter name
-    var getMessage = ensure._getMessage = function(assertionMessage, defaultMessageTemplate, parameterName, context) {
-        var message = assertionMessage;
-
-        if (utils.isNullOrEmpty(message)) {
-            message = _.formatString(defaultMessageTemplate,
-                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
-                utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
-        }
-
-        if (utils.isNullOrEmpty(message)) {
-            message = _.formatString(defaultMessageTemplate,
-                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
-                utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
-        }
-
-        return message;
+        return gsoft._ensure(gsoft.ensure.assertions, parameter, parameterName, context);
     };
 
     ensure.assertions = {

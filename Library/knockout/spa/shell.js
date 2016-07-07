@@ -1,5 +1,5 @@
-(function($, serviceRegistry, defaultRouter, defaultViewProvider, defaultViewRenderer, defaultRouteRegistry, defaultRouteUrlResolver, utils, ensure, mediator) {
-    var shell = gsoft.spa.shell = {
+(function($, defaultRouter, defaultViewProvider, defaultViewRenderer, defaultRouteRegistry, defaultRouteUrlResolver, utils, mediator) {
+    var shell = spa.shell = {
         _router: null,
         _viewProvider: null,
         _viewRenderer: null,
@@ -20,8 +20,8 @@
         //      callback: Function
         //              An optional callback that is call when the application is started. 
         start: function(options) {
-            ensure(options, "options", "Shell.start").isObject();
-            ensure(options.containerElement, "options.containerElement", "Shell.start").isDomElement();
+            gsoft.ensure(options, "options", "Shell.start").isObject();
+            gsoft.ensure(options.containerElement, "options.containerElement", "Shell.start").isDomElement();
             
             if (this._started) {
                 throw new gsoft.InvalidOperationError("Shell.start - The Knockout SPA application has already been started.");
@@ -55,34 +55,34 @@
             return this._debug;
         },
         
-        // summary:
-        //         Register a service.
-        // options: Object
-        //         name: String
-        //              A service name.
-        //         factory: Function
-        //              A factory to create an instance of the service. When the factory function is called, the shell will be provided as parameter.         
-        registerService: function(options) {
-            ensure(options, "options", "Shell.registerService").isObject();
+        // // summary:
+        // //         Register a service.
+        // // options: Object
+        // //         name: String
+        // //              A service name.
+        // //         factory: Function
+        // //              A factory to create an instance of the service. When the factory function is called, the shell will be provided as parameter.         
+        // registerService: function(options) {
+        //     gsoft.ensure(options, "options", "Shell.registerService").isObject();
             
-            serviceRegistry.add(options.name, options.factory);
-        },
+        //     serviceRegistry.add(options.name, options.factory);
+        // },
         
-        // summary:
-        //         Retrieve a service with the specified @name.
-        // name: String
-        //         A service name.
-        // returns:
-        //         A service.
-        getService: function(name) {
-            var factory = serviceRegistry.find(name);
+        // // summary:
+        // //         Retrieve a service with the specified @name.
+        // // name: String
+        // //         A service name.
+        // // returns:
+        // //         A service.
+        // getService: function(name) {
+        //     var factory = serviceRegistry.find(name);
             
-            if (utils.isNull(factory)) {
-                throw new gsoft.ArgumentError("Shell.getService - The service named {0} is not registered.".format(name));
-            }
+        //     if (utils.isNull(factory)) {
+        //         throw new gsoft.ArgumentError(_.formatString("Shell.getService - The service named {0} is not registered.", name));
+        //     }
             
-            return factory(this);
-        },
+        //     return factory(this);
+        // },
         
         // summary:
         //         Register a page.
@@ -102,10 +102,10 @@
         //          viewModelBinder: ViewModelBinder
         //              An optional view model binder.
         registerPage: function(options) {
-            ensure(options, "options", "shell.registerPage").isObject();
+            gsoft.ensure(options, "options", "shell.registerPage").isObject();
             
             if (!utils.isNull(options.aliases)) {
-                ensure(options.aliases, "options.aliases", "Shell.aliases").isArray();
+                gsoft.ensure(options.aliases, "options.aliases", "Shell.aliases").isArray();
             }
             
             this._addRoute({
@@ -135,9 +135,9 @@
             var that = this;
             
             // jscs:disable requireBlocksOnNewline
-            ensure(options.url, "url", "Shell.registerPage").isNotNullOrEmpty();
-            ensure(options.viewUrl, "viewUrl").isTrue(function(x) { return !utils.isNullOrEmpty(x) || utils.isFunction(x); }, "Shell.registerPage viewUrl must be a non empty string or a function.");
-            ensure(options.viewModelBinder, "viewModelBinder", "Shell.registerPage")._isViewModelBinder();  
+            gsoft.ensure(options.url, "url", "Shell.registerPage").isNotNullOrEmpty();
+            gsoft.ensure(options.viewUrl, "viewUrl").isTrue(function(x) { return !utils.isNullOrEmpty(x) || utils.isFunction(x); }, "Shell.registerPage viewUrl must be a non empty string or a function.");
+            spa.ensure(options.viewModelBinder, "viewModelBinder", "Shell.registerPage")._isViewModelBinder();  
             // jscs:enable requireBlocksOnNewline
             
             if (utils.isNullOrEmpty(options.name)) {
@@ -146,9 +146,9 @@
             
             if (utils.isNull(options.viewModelBinder)) {
                 if (utils.isFunction(options.viewModelFactory)) {
-                    options.viewModelBinder = new gsoft.spa.SimpleViewModelBinder(options.viewModelFactory);
+                    options.viewModelBinder = new spa.SimpleViewModelBinder(options.viewModelFactory);
                 } else {
-                    options.viewModelBinder = new gsoft.spa.DummyViewModelBinder();
+                    options.viewModelBinder = new spa.DummyViewModelBinder();
                 }
             }
             
@@ -203,7 +203,7 @@
                 url: options.viewUrl,
                 useCache: options.cacheView,
                 callback: function() {
-                    options.viewModelBinder.bind(that._containerElement, new gsoft.spa.PageContext(that), options.parameters).done(function() {
+                    options.viewModelBinder.bind(that._containerElement, options.parameters).done(function() {
                         that._publishPageChanged(options.url, options.viewUrl, options.parameters);
                     });
                 }
@@ -242,7 +242,7 @@
                             cannotExit();
                         }
                     } else {
-                        ensure(result, "viewModelBinder.unbind", "Shell._onExitRoute")._isjQueryPromise();
+                        spa.ensure(result, "viewModelBinder.unbind", "Shell._onExitRoute")._isjQueryPromise();
 
                         // Exit the route.
                         result.done(function() {
@@ -288,7 +288,7 @@
             this._router.addRoute(options.url, function(url, routeParameters) {
                 var redirectUrl = that.getRouteUrl(options.redirectTo.name, routeParameters);
                 
-                utils.spa._navigate(redirectUrl);
+                spa.utils._navigate(redirectUrl);
             });
         },
         
@@ -302,16 +302,16 @@
         //              parameters: Object
         //                  An object that contains key / value associations for every parameters of the routes.
         setApplicationRootRoute: function(route) {
-            ensure(route, "route", "Shell.setApplicationRootRoute").isNotNull();
+            gsoft.ensure(route, "route", "Shell.setApplicationRootRoute").isNotNull();
 
             var routeUrl = null;
 
             if (utils.isString(route)) {
-                ensure(route, "route", "Shell.setApplicationRootRoute").isNotEmpty();
+                gsoft.ensure(route, "route", "Shell.setApplicationRootRoute").isNotEmpty();
 
                 routeUrl = route;
             } else if (utils.isObject(route)) {
-                ensure(route.name, "route.name", "Shell.setApplicationRootRoute").isNotNullOrEmpty();
+                gsoft.ensure(route.name, "route.name", "Shell.setApplicationRootRoute").isNotNullOrEmpty();
 
                 routeUrl = this.getRouteUrl(route.name, route.parameters);
             } else {
@@ -320,7 +320,7 @@
 
             this._router.setRoot(routeUrl);    
 
-            utils.trace("[SHELL] {0} is the root route.".format(routeUrl));
+            utils.trace(_.formatString("[SHELL] {0} is the root route.", routeUrl));
         },
             
         // summary:
@@ -333,17 +333,17 @@
         //              parameters: Object
         //                  An object that contains key / value associations for every parameters of the routes.
         set404Route: function(route) {
-            ensure(route, "route", "Shell.set404Route").isNotNull();
+            gsoft.ensure(route, "route", "Shell.set404Route").isNotNull();
 
             var that = this;
             var routeUrl = null;
 
             if (utils.isString(route)) {
-                ensure(route, "route", "Shell.set404Route").isNotEmpty();
+                gsoft.ensure(route, "route", "Shell.set404Route").isNotEmpty();
 
                 routeUrl = route;
             } else if (utils.isObject(route)) {
-                ensure(route.name, "route.name", "Shell.set404Route").isNotNullOrEmpty();
+                gsoft.ensure(route.name, "route.name", "Shell.set404Route").isNotNullOrEmpty();
 
                 routeUrl = this.getRouteUrl(route.name, route.parameters);
             } else {
@@ -354,65 +354,65 @@
                 that._router.runRoute(routeUrl);
             });
 
-            utils.trace("[SHELL] {0} is the 404 route.".format(routeUrl));
+            utils.trace(_.formatString("[SHELL] {0} is the 404 route.", routeUrl));
         },
         
-        // summary:
-        //          Subscribe to a @channel. Everytime an event is published to that @channel 
-        //          the @callback will be called with the event value.
-        // channel: String
-        //          A channel to suscribe to.
-        // callback: Function
-        //          An handler to call when an event is published on the @channel.
-        // options: Object
-        //          An optional object with options. Options can be:
-        //             - priority: The subscriber priority. A subscriber with an higher will be notified
-        //               before a subscriber with a lower priority.
-        // returns:
-        //         An object that contains informations about the subscription and a function to 
-        //         unsuscribe from the @channel.
-        subscribe: function() {
-            return mediator.subscribe.apply(mediator, arguments);
-        },
+        // // summary:
+        // //          Subscribe to a @channel. Everytime an event is published to that @channel 
+        // //          the @callback will be called with the event value.
+        // // channel: String
+        // //          A channel to suscribe to.
+        // // callback: Function
+        // //          An handler to call when an event is published on the @channel.
+        // // options: Object
+        // //          An optional object with options. Options can be:
+        // //             - priority: The subscriber priority. A subscriber with an higher will be notified
+        // //               before a subscriber with a lower priority.
+        // // returns:
+        // //         An object that contains informations about the subscription and a function to 
+        // //         unsuscribe from the @channel.
+        // subscribe: function() {
+        //     return mediator.subscribe.apply(mediator, arguments);
+        // },
         
-        // summary:
-        //          Subscribe to a @channel for a single event. When the first event is published, the subscriber
-        //          will be automatically unsubscribed from the @channel.
-        // channel: String
-        //          A channel to suscribe to.
-        // callback: Function
-        //          An handler to call when an event is published on the @channel.
-        // options: Object
-        //          An optional object with options. Options can be:
-        //             - priority: The subscriber priority. A subscriber with an higher will be notified
-        //               before a subscriber with a lower priority.
-        // returns:
-        //         An object that contains informations about the subscription and a function to 
-        //         unsuscribe from the @channel.
-        subscribeOnce: function() {
-            return mediator.subscribeOnce.apply(mediator, arguments);
-        },
+        // // summary:
+        // //          Subscribe to a @channel for a single event. When the first event is published, the subscriber
+        // //          will be automatically unsubscribed from the @channel.
+        // // channel: String
+        // //          A channel to suscribe to.
+        // // callback: Function
+        // //          An handler to call when an event is published on the @channel.
+        // // options: Object
+        // //          An optional object with options. Options can be:
+        // //             - priority: The subscriber priority. A subscriber with an higher will be notified
+        // //               before a subscriber with a lower priority.
+        // // returns:
+        // //         An object that contains informations about the subscription and a function to 
+        // //         unsuscribe from the @channel.
+        // subscribeOnce: function() {
+        //     return mediator.subscribeOnce.apply(mediator, arguments);
+        // },
         
-        // summary:
-        //          unsubscribe from a @channel.
-        // channel: String
-        //          A channel to unsubscribe from.
-        // callback: Function
-        //          A callback function that was specified when the subscription to the @channel
-        //          was made.
-        unsubscribe: function() {
-            mediator.unsubscribe.apply(mediator, arguments);
-        },
+        // // summary:
+        // //          unsubscribe from a @channel.
+        // // channel: String
+        // //          A channel to unsubscribe from.
+        // // callback: Function
+        // //          A callback function that was specified when the subscription to the @channel
+        // //          was made.
+        // unsubscribe: function() {
+        //     mediator.unsubscribe.apply(mediator, arguments);
+        // },
         
-        // summary:
-        //          Publish a @value to a @channel.
-        // channel: String
-        //          A channel to publish to.
-        // value(s): Object
-        //          The value(s) to publish on the @channel.
-        publish: function() {
-            mediator.publish.apply(mediator, arguments);
-        },
+        // // summary:
+        // //          Publish a @value to a @channel.
+        // // channel: String
+        // //          A channel to publish to.
+        // // value(s): Object
+        // //          The value(s) to publish on the @channel.
+        // publish: function() {
+        //     mediator.publish.apply(mediator, arguments);
+        // },
         
         // summary:
         //         Publish an error to the error channel of the mediator.
@@ -423,10 +423,10 @@
         // value: Object
         //         An optional value.
         publishError: function(source, errorType, value) {
-            ensure(source, "source", "Shell.publishError").isNotNullOrEmpty();
-            ensure(errorType, "errorType", "Shell.publishError").isNotNullOrEmpty();
+            gsoft.ensure(source, "source", "Shell.publishError").isNotNullOrEmpty();
+            gsoft.ensure(errorType, "errorType", "Shell.publishError").isNotNullOrEmpty();
             
-            mediator.publish(gsoft.spa.Channel.Error, {
+            mediator.publish(spa.Channel.Error, {
                 source: source,
                 errorType: errorType,
                 data: value
@@ -440,11 +440,11 @@
         // predicate: Function
         //         An optional function to filter the published events.
         onError: function(callback, predicate) {
-            mediator.subscribe(gsoft.spa.Channel.Error, callback, predicate);
+            mediator.subscribe(spa.Channel.Error, callback, predicate);
         },
         
         _publishPageChanging: function(targetUrl, targetViewUrl, targetParameters) {
-            mediator.publishSilently(gsoft.spa.Channel.PageChanging, {
+            mediator.publishSilently(spa.Channel.PageChanging, {
                 pageUrl: targetUrl,
                 viewUrl: targetViewUrl,
                 parameters: targetParameters
@@ -458,11 +458,11 @@
         // predicate: Function
         //         An optional function to filter the published events.
         onPageChanging: function(callback, predicate) {
-            mediator.subscribe(gsoft.spa.Channel.PageChanging, callback, predicate);
+            mediator.subscribe(spa.Channel.PageChanging, callback, predicate);
         },
 
         _publishPageChanged: function(url, viewUrl, parameters) {
-            mediator.publishSilently(gsoft.spa.Channel.PageChanged, {
+            mediator.publishSilently(spa.Channel.PageChanged, {
                 pageUrl: url,
                 viewUrl: viewUrl,
                 parameters: parameters
@@ -476,7 +476,7 @@
         // predicate: Function
         //         An optional function to filter the published events.
         onPageChanged: function(callback, predicate) {
-            mediator.subscribe(gsoft.spa.Channel.PageChanged, callback, predicate);
+            mediator.subscribe(spa.Channel.PageChanged, callback, predicate);
         },
         
         // summary:
@@ -488,7 +488,7 @@
         // returns:
         //         An URL.
         getRouteUrl: function(name, parameters) {
-            ensure(name, "name", "Shell.getRouteUrl").isNotNullOrEmpty();
+            gsoft.ensure(name, "name", "Shell.getRouteUrl").isNotNullOrEmpty();
 
             return this._routeUrlResolver.getRouteUrl(this._routeRegistry, name, parameters);
         },
@@ -498,7 +498,7 @@
         // newRouter: Object
         //         A router instance.
         setRouter: function(newRouter) {
-            ensure(newRouter, "newRouter", "Shell.setRouter")._isRouter();
+            spa.ensure(newRouter, "newRouter", "Shell.setRouter")._isRouter();
             
             this._router =  newRouter;
         },
@@ -508,7 +508,7 @@
         // newViewProvider: Object
         //         A view provider instance.
         setViewProvider: function(newViewProvider) {
-            ensure(newViewProvider, "newViewProvider", "Shell.setViewProvider")._isViewProvider();
+            spa.ensure(newViewProvider, "newViewProvider", "Shell.setViewProvider")._isViewProvider();
 
             this._viewProvider = newViewProvider;
         },
@@ -518,7 +518,7 @@
         // newViewRenderer: Object
         //         A view renderer instance.
         setViewRenderer: function(newViewRenderer) {
-            ensure(newViewRenderer, "newViewRenderer", "Shell.setViewRenderer")._isViewRenderer();
+            spa.ensure(newViewRenderer, "newViewRenderer", "Shell.setViewRenderer")._isViewRenderer();
 
             this._viewRenderer = newViewRenderer;
         },
@@ -528,7 +528,7 @@
         // newRouteRegistry: Object
         //         A route registry instance.
         setRouteRegistry: function(newRouteRegistry) {
-            ensure(newRouteRegistry, "newRouteRegistry", "Shell.setRouteRegistry")._isRouteRegistry();
+            spa.ensure(newRouteRegistry, "newRouteRegistry", "Shell.setRouteRegistry")._isRouteRegistry();
 
             this._routeRegistry = newRouteRegistry;
         },
@@ -538,7 +538,7 @@
         // newRouteUrlResolver: Object
         //         A route URL resolver instance.
         setRouteUrlResolver: function(newRouteUrlResolver) {
-            ensure(newRouteUrlResolver, "newRouteUrlResolver", "Shell.setRouteUrlResolver")._isRouteUrlResolver();
+            spa.ensure(newRouteUrlResolver, "newRouteUrlResolver", "Shell.setRouteUrlResolver")._isRouteUrlResolver();
 
             this._routeUrlResolver = newRouteUrlResolver;
         }
@@ -552,17 +552,13 @@
     shell.setRouteUrlResolver(defaultRouteUrlResolver);
 
     // Define shortcuts for the most frequently used functions.
-    gsoft.spa.action = gsoft.spa.shell.getRouteUrl.bind(gsoft.spa.shell);
-    gsoft.spa.registerPage = gsoft.spa.shell.registerPage.bind(gsoft.spa.shell);
-    gsoft.spa.registerService = gsoft.spa.shell.registerService.bind(gsoft.spa.shell);
-    gsoft.spa.getService = gsoft.spa.shell.getService.bind(gsoft.spa.shell);
+    spa.action = spa.shell.getRouteUrl.bind(spa.shell);
+    spa.registerPage = spa.shell.registerPage.bind(spa.shell);
 })(jQuery, 
-   gsoft.spa.serviceRegistry,
-   gsoft.spa.router,
-   gsoft.spa.viewProvider,
-   gsoft.spa.viewRenderer,
-   gsoft.spa.routeRegistry,
-   gsoft.spa.routeUrlResolver,
+   spa.router,
+   spa.viewProvider,
+   spa.viewRenderer,
+   spa.routeRegistry,
+   spa.routeUrlResolver,
    gsoft.utils,
-   gsoft.ensure,
    gsoft.mediator);

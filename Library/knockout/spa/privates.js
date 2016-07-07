@@ -7,14 +7,6 @@
     // an "Array like" it doesn't implements the native array manipulation functions.
     var shift = Array.prototype.shift;
 
-    _.isBrowser = function() {
-        return typeof document === "object";
-    };
-
-    _.isDebug = function() {
-        return gsoft.debug;
-    };
-
     _.formatString = function() {
         var args = arguments;
         var format = shift.apply(args);

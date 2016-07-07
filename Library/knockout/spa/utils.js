@@ -19,7 +19,7 @@
     // Index used to generate GUID.
     var nextGuid = 0;
     
-    utils.spa = {
+    spa.utils = {
         // summary:
         //         Determines wether @value is a jQuery element.
         // value: Object

@@ -4,7 +4,7 @@
 // ---------------------------------
 
 (function($, utils) {
-    gsoft.spa.viewModel = class ViewModel {
+    spa.viewModel = class ViewModel {
         // summary:
         //         When defined, the function will be called before applying the bindings.
         // returns:
@@ -33,7 +33,7 @@
             if (utils.isFunction(this._beforeBind)) {
                 var promise = this._beforeBind.call(this);
 
-                if (utils.spa._isjQueryPromise(promise)) {
+                if (spa.utils._isjQueryPromise(promise)) {
                     var that = this;
 
                     promise.done(function() {

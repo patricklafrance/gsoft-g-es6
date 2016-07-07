@@ -39,63 +39,6 @@ global.scripts.files.core.widgets = {
 
 global.scripts.files.knockout = {};
 
-global.scripts.files.knockout.spa = {
-    sources: [
-        "library/knockout/spa/constants.js",
-        "library/knockout/spa/utils.js",
-        "library/knockout/spa/ensure.js",
-        "library/knockout/spa/mediator.js",
-        "library/knockout/spa/route.js",
-        "library/knockout/spa/route.registry.js",
-        "library/knockout/spa/route.resolver.js",
-        "library/knockout/spa/router.js",
-        "library/knockout/spa/view.provider.js",
-        "library/knockout/spa/view.renderer.js",
-        "library/knockout/spa/binders/base.viewmodel.binder.js",
-        "library/knockout/spa/binders/dummy.viewmodel.binder.js",
-        "library/knockout/spa/binders/composite.viewmodel.binder.js",
-        "library/knockout/spa/binders/simple.viewmodel.binder.js",
-        "library/knockout/spa/view.renderer.js",
-        "library/knockout/spa/service.registry.js",
-        "library/knockout/spa/shell.js",
-        "library/knockout/spa/binding.action.js",
-        "library/knockout/spa/page.viewmodel.js",
-        "library/knockout/spa/page.context.js",
-        "library/knockout/spa/component.loader.js"
-    ],
-    fragments: {
-        pre: ["library/knockout/spa/fragments/notes.js", "library/knockout/spa/fragments/intro.js"],
-        post: ["library/knockout/spa/fragments/outro.js"]
-    }
-};
-
-global.scripts.files.knockout.spa.es6 = {
-    sources: [
-        "library/knockout/spa-es6/page.viewmodel.js"
-    ],
-    fragments: {
-        pre: ["library/knockout/spa-es6/fragments/notes.js", "library/knockout/spa-es6/fragments/intro.js"],
-        post: ["library/knockout/spa-es6/fragments/outro.js"]
-    }
-};
-
-global.scripts.files.knockout.spa.typescript = {
-    sources: [
-        "library/knockout/spa-typescript/gsoft.ko.spa.typescript.ts"
-    ]
-};
-
-global.scripts.files.knockout.spa.services = {
-    sources: [
-        "library/knockout/spa-services/service.http.js",
-        "library/knockout/spa-services/service.objectNavigator.js"
-    ],
-    fragments: {
-        pre: ["library/knockout/spa-services/fragments/notes.js", "library/knockout/spa-services/fragments/intro.js"],
-        post: ["library/knockout/spa-services/fragments/outro.js"]
-    }
-};
-
 global.scripts.files.knockout.bindings = {
     sources: [
         "library/knockout/bindings/href.js",
@@ -130,4 +73,61 @@ global.scripts.files.knockout.debugging = {
         pre: ["library/knockout/debugging/fragments/notes.js", "library/knockout/debugging/fragments/intro.js"],
         post: ["library/knockout/debugging/fragments/outro.js"]
     }
+};
+
+global.scripts.files.knockout.spa = {
+    sources: [
+        "library/knockout/spa/privates.js",
+        "library/knockout/spa/constants.js",
+        "library/knockout/spa/utils.js",
+        "library/knockout/spa/ensure.js",
+        "library/knockout/spa/route.js",
+        "library/knockout/spa/route.registry.js",
+        "library/knockout/spa/route.resolver.js",
+        "library/knockout/spa/router.js",
+        "library/knockout/spa/view.provider.js",
+        "library/knockout/spa/view.renderer.js",
+        "library/knockout/spa/binders/base.viewmodel.binder.js",
+        "library/knockout/spa/binders/dummy.viewmodel.binder.js",
+        "library/knockout/spa/binders/composite.viewmodel.binder.js",
+        "library/knockout/spa/binders/simple.viewmodel.binder.js",
+        "library/knockout/spa/view.renderer.js",
+        // "library/knockout/spa/service.registry.js",
+        "library/knockout/spa/shell.js",
+        // "library/knockout/spa/binding.action.js",
+        "library/knockout/spa/page.viewmodel.js",
+        // "library/knockout/spa/page.context.js",
+        "library/knockout/spa/component.loader.js"
+    ],
+    fragments: {
+        pre: ["library/knockout/spa/fragments/notes.js", "library/knockout/spa/fragments/export.js", "library/knockout/spa/fragments/intro.js"],
+        post: ["library/knockout/spa/fragments/outro.js"]
+    }
+};
+
+global.scripts.files.knockout.spa.services = {
+    sources: [
+        "library/knockout/spa-services/service.http.js",
+        "library/knockout/spa-services/service.objectNavigator.js"
+    ],
+    fragments: {
+        pre: ["library/knockout/spa-services/fragments/notes.js", "library/knockout/spa-services/fragments/intro.js"],
+        post: ["library/knockout/spa-services/fragments/outro.js"]
+    }
+};
+
+global.scripts.files.knockout.spa.es6 = {
+    sources: [
+        "library/knockout/spa-es6/page.viewmodel.js"
+    ],
+    fragments: {
+        pre: ["library/knockout/spa-es6/fragments/notes.js", "library/knockout/spa-es6/fragments/intro.js"],
+        post: ["library/knockout/spa-es6/fragments/outro.js"]
+    }
+};
+
+global.scripts.files.knockout.spa.typescript = {
+    sources: [
+        "library/knockout/spa-typescript/gsoft.ko.spa.typescript.ts"
+    ]
 };

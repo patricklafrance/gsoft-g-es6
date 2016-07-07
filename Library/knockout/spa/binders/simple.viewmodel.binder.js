@@ -1,13 +1,13 @@
 // Single ViewModel binder
 // ---------------------------------
 
-(function($, utils, ensure, undefined) {
+(function($, utils, undefined) {
     // summary:
     //         A view model binder that handle routes with a single view model.
     // viewModelFactory: Function
     //         A function that returns a KO view model to bind.
-    gsoft.spa.SimpleViewModelBinder = function(viewModelFactory) {
-        ensure(viewModelFactory, "viewModelFactory", "SimpleViewModelBinder.ctor").isFunction();
+    spa.SimpleViewModelBinder = function(viewModelFactory) {
+        gsoft.ensure(viewModelFactory, "viewModelFactory", "SimpleViewModelBinder.ctor").isFunction();
 
         this._element = null;
         this._viewModel = null;
@@ -15,28 +15,26 @@
         this._isBound = false;
     };
 
-    gsoft.spa.SimpleViewModelBinder.prototype = $.extend({}, gsoft.spa.ViewModelBinder, {
+    spa.SimpleViewModelBinder.prototype = $.extend({}, spa.ViewModelBinder, {
         // summary:
         //         Bind the KO view model.
         // element: jQuery element
         //         An element to bind the @viewModel to.
-        // context: Object
-        //         A subset of the shell functionalities.
         // parameters: Object
         //         An objet thats contains parameters for the view model factory.
         // returns:
         //         A jQuery promise.
-        bind: function(element, context, parameters) {
-            ensure(element, "element", "SimpleViewModelBinder.bind").isDomElement();
+        bind: function(element, parameters) {
+            gsoft.ensure(element, "element", "SimpleViewModelBinder.bind").isDomElement();
 
-            this._viewModel = this._getViewModel(this._viewModelFactory, context, parameters, element);
+            this._viewModel = this._getViewModel(this._viewModelFactory, parameters, element);
             this._element = element;
 
             var that = this;
             var deferred = $.Deferred();
             var bindingPromise = this._bindViewModel(this._viewModel, element);
 
-            ensure(bindingPromise)._isjQueryPromise("SimpleViewModelBinder.bind - View model \"bind\" function must return a jQuery promise.");
+            spa.ensure(bindingPromise)._isjQueryPromise("SimpleViewModelBinder.bind - View model \"bind\" function must return a jQuery promise.");
 
             bindingPromise.done(function() {
                 that._isBound = true;
@@ -98,7 +96,7 @@
                     return result;
                 } 
                 
-                if (utils.spa._isjQueryPromise(result)) {
+                if (spa.utils._isjQueryPromise(result)) {
                     result.done(function() {
                         disposeViewModel();
                     });
@@ -117,11 +115,10 @@
         _onBindingFailed: function() {
             utils.trace("[SHELL] An error occured while binding a view model to a view with the SimpleViewModelBinder");
 
-            gsoft.spa.shell.publishError(
-                gsoft.spa.Component.SimpleViewModelBinder, 
+            spa.shell.publishError(
+                spa.Component.SimpleViewModelBinder, 
                 "BindingFailed");
         }
     });
-})(jQuery, 
-   gsoft.utils, 
-   gsoft.ensure);
+})(jQuery,
+   gsoft.utils);

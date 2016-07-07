@@ -1,8 +1,8 @@
 // Hash router
 // ---------------------------------
 
-(function(utils, ensure, mediator) {
-    gsoft.spa.router = {
+(function(utils, mediator) {
+    spa.router = {
         // summary:
         //         Ensure that a @parameter respect the specified assertions.
         // url: String
@@ -19,11 +19,11 @@
         //         An object that contains informations about the route and a function to 
         //         execute the route.
         addRoute: function(url, callback, options) {
-            ensure(url, "url", "Router.addRoute").isNotNullOrEmpty();
-            ensure(callback, "callback", "Router.addRoute").isFunction();
+            gsoft.ensure(url, "url", "Router.addRoute").isNotNullOrEmpty();
+            gsoft.ensure(callback, "callback", "Router.addRoute").isFunction();
 
             var route = Path.map(url).to(function() {
-                utils.trace("[SHELL] Entered route {0}".format(url));
+                utils.trace(_.formatString("[SHELL] Entered route {0}", url));
 
                 mediator.publishSilently("g-spa-enteredRoute", {
                     url: url,
@@ -33,12 +33,12 @@
                 callback.apply(null, [url, this.params]);
             });
                 
-            utils.trace("[SHELL] {0} route has been registred".format(url));
+            utils.trace(_.formatString("[SHELL] {0} route has been registred", url));
             
             options = options || {};
 
             route.exit(function(canExitCallback) {
-                utils.trace("[SHELL] Exited route {0}".format(url));
+                utils.trace(_.formatString("[SHELL] Exited route {0}", url));
 
                 mediator.publishSilently("g-spa-exitedRoute", url);
 
@@ -62,12 +62,12 @@
         // url: String
         //         The URL of the route.
         runRoute: function(url) {
-            ensure(url, "url", "Router.runRoute").isNotNullOrEmpty();
+            gsoft.ensure(url, "url", "Router.runRoute").isNotNullOrEmpty();
 
             var route = Path.match(url, true);
 
             if (utils.isNull(route)) {
-                throw new gsoft.ArgumentError("Router.runRoute - {0} does not match any registered route".format(url));
+                throw new gsoft.ArgumentError(_.formatString("Router.runRoute - {0} does not match any registered route", url));
             }
 
             route.run();
@@ -78,11 +78,11 @@
         // route: String
         //         A route.
         setRoot: function(route) {
-            ensure(route, "route", "Router.setDefaultRoute").isNotNullOrEmpty();
+            gsoft.ensure(route, "route", "Router.setDefaultRoute").isNotNullOrEmpty();
 
             Path.root(route);
 
-            utils.trace("[SHELL] {0} is the default route".format(route));
+            utils.trace(_.formatString("[SHELL] {0} is the default route", route));
         },
 
         // summary:
@@ -90,7 +90,7 @@
         // handler: Function
         //         An handler.
         set404Handler: function(handler) {
-            ensure(handler, "handler", "Router.set404Handler").isFunction();
+            gsoft.ensure(handler, "handler", "Router.set404Handler").isFunction();
 
             Path.rescue(handler);
         },
@@ -103,6 +103,5 @@
             Path.listen();
         }
     };
-})(gsoft.utils, 
-   gsoft.ensure, 
+})(gsoft.utils,
    gsoft.mediator);

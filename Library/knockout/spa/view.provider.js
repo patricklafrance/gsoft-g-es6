@@ -1,8 +1,8 @@
 // View provider service
 // ---------------------------------
 
-(function($, utils, ensure) {
-    gsoft.spa.viewProvider = {
+(function($, utils) {
+    spa.viewProvider = {
         _cache: {},
 
         // summary:
@@ -14,7 +14,7 @@
         // returns:
         //         A jQuery promise.
         get: function(url, useCache) {
-            ensure(url, "url", "ViewProvider.get").isNotNullOrEmpty();
+            gsoft.ensure(url, "url", "ViewProvider.get").isNotNullOrEmpty();
 
             var that = this;
 
@@ -96,9 +96,8 @@
         },
 
         _publishError: function(errorType, data) {
-            gsoft.spa.shell.publishError(gsoft.spa.Component.ViewProvider, errorType, data);
+            spa.shell.publishError(spa.Component.ViewProvider, errorType, data);
         }
     };
-})(jQuery, 
-   gsoft.utils, 
-   gsoft.ensure);
+})(jQuery,
+   gsoft.utils);

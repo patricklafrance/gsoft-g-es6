@@ -3,8 +3,11 @@
 
     var gsoft = null;
 
-    if (typeof require === "object") {
+    if (typeof module === "object") {
         gsoft = require("gsoft");
-    } else if (typeof window === "object") {
-        gsoft = window.gsoft;
+    } 
+    else if (typeof window === "object") {
+        if (window.GSOFT_UNIT_TESTS === true) {
+            gsoft = window.gsoft;
+        }
     }

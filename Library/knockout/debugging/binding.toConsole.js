@@ -1,7 +1,7 @@
-(function() {
+(function(utils) {
     ko.bindingHandlers.toConsole = {
         update: function(element, valueAccessor) {
-            gsoft.utils.trace(valueAccessor());
+            utils.trace(valueAccessor());
         }
     };
-})();
+})(gsoft.utils);

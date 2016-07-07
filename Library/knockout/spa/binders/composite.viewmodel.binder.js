@@ -1,16 +1,16 @@
 // Composite ViewModel binder
 // ---------------------------------
 
-(function($, utils, ensure, undefined) {
+(function($, utils, undefined) {
     // summary:
     //         A view model binder handling routes that contains multiple KO view models.
     // bindings: Array
     //         An array of bindings.
-    gsoft.spa.CompositeViewModelBinder = function(bindings) {
-        ensure(bindings, "bindings", "CompositeViewModelBinder.ctor").isArray().isNotEmpty();
+    spa.CompositeViewModelBinder = function(bindings) {
+        gsoft.ensure(bindings, "bindings", "CompositeViewModelBinder.ctor").isArray().isNotEmpty();
 
         bindings.forEach(function(binding) {
-            ensure(binding)._isBinding("CompositeViewModelBinder.ctor - \"bindings\" array contains at least an invalid binding.");
+            spa.ensure(binding)._isBinding("CompositeViewModelBinder.ctor - \"bindings\" array contains at least an invalid binding.");
         });
 
         this._element = null;
@@ -18,25 +18,23 @@
         this._isBound = false;
     };
 
-    gsoft.spa.CompositeViewModelBinder.prototype = $.extend({}, gsoft.spa.ViewModelBinder, {
+    spa.CompositeViewModelBinder.prototype = $.extend({}, spa.ViewModelBinder, {
         // summary:
         //         Bind the KO view models.
         // element: jQuery element
         //         An element to bind the @viewModel to.
-        // context: Object
-        //         A subset of the shell functionalities.
         // parameters: Object
         //         An objet thats contains parameters for the view model factory.
         // returns:
         //         A jQuery promise.
-        bind: function(element, context, parameters) {
-            ensure(element, "element", "CompositeViewModelBinder.bind").isDomElement();
+        bind: function(element, parameters) {
+            gsoft.ensure(element, "element", "CompositeViewModelBinder.bind").isDomElement();
 
             this._element = element;
 
             var that = this;
             var deferred = $.Deferred();
-            var bindingPromises = this._applyBindings(element, context, parameters);
+            var bindingPromises = this._applyBindings(element, parameters);
 
             function whenDone() {
                 that._isBound = true;
@@ -80,17 +78,17 @@
             return this._isBound;
         },
 
-        _applyBindings: function(element, context, parameters) {
+        _applyBindings: function(element, parameters) {
             var bindingPromises = [];
             
             this._bindings.forEach(function(binding) {
                 // Augments the binding with the resolved view model for further used.
-                binding.viewModel = this._getViewModel(binding.viewModelFactory, context, parameters, element);
+                binding.viewModel = this._getViewModel(binding.viewModelFactory, parameters, element);
 
                 var bindingElement = this._getBindingElement(binding.bindingElementAccessor, element);
                 var bindingPromise = this._bindViewModel(binding.viewModel, bindingElement);
                     
-                ensure(bindingPromise)._isjQueryPromise("CompositeViewModelBinder._applyBindings - View model \"bind\" function must return a jQuery promise.");
+                spa.ensure(bindingPromise)._isjQueryPromise("CompositeViewModelBinder._applyBindings - View model \"bind\" function must return a jQuery promise.");
                 bindingPromises.push(bindingPromise);
             }, this);
 
@@ -154,7 +152,7 @@
                             // Break the loop.
                             return false;
                         }
-                    } else if (utils.spa._isjQueryPromise(result)) {
+                    } else if (spa.utils._isjQueryPromise(result)) {
                         canDisposePromises.push(result);
                     } else {
                         throw new gsoft.InvalidOperationError("CompositeViewModelBinder.unbind - The \"canDispose\" function must return a boolean value or a jQuery promise.");
@@ -185,7 +183,7 @@
             this._bindings.forEach(function(binding) {
                 var bindingElement = this._getBindingElement(binding.bindingElementAccessor, element);
 
-                if (!gsoft.isNull(bindingElement)) {
+                if (!utils.isNull(bindingElement)) {
                     this._cleanElement(bindingElement);
                 }
                
@@ -196,11 +194,10 @@
         _onBindingFailed: function() {
             utils.trace("[SHELL] An error occured while binding a view model to a view with the CompositeViewModelBinder");
 
-            gsoft.spa.shell.publishError(
-                gsoft.spa.Component.CompositeViewModelBinder,
+            spa.shell.publishError(
+                spa.Component.CompositeViewModelBinder,
                 "BindingFailed");
         }
     });
 })(jQuery, 
-   gsoft.utils, 
-   gsoft.ensure);
+   gsoft.utils);

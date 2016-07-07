@@ -2,13 +2,12 @@
 // ---------------------------------
 
 (function($, utils) {
-    var componentLoader = gsoft.spa.componentLoader = {
+    var componentLoader = spa.componentLoader = {
         loadViewModel: function(componentName, ViewModelConfig, callback) {
-            if (g.utils.isFunction(ViewModelConfig)) {
+            if (utils.isFunction(ViewModelConfig)) {
                 callback(function(params, componentInfo) {
-                    var context = new gsoft.spa.PageContext(gsoft.spa.shell);
                     var resources = componentLoader._getResources(componentInfo);
-                    var viewModel = new ViewModelConfig(context, params, resources);
+                    var viewModel = new ViewModelConfig(params, resources);
     
                     if (utils.isFunction(viewModel._beforeBind)) {
                         viewModel._beforeBind.call(viewModel);

@@ -1,16 +1,16 @@
 // Base ViewModel binder
 // ---------------------------------
 
-(function($, utils, ensure) {
-    gsoft.spa.ViewModelBinder = {
-        _getViewModel: function(viewModelFactory, context, parameters, element) {
+(function($, utils) {
+    spa.ViewModelBinder = {
+        _getViewModel: function(viewModelFactory, parameters, element) {
             var resources = this._getResources(element);
 
             // An accessor function is used to retrieve the view model to let the user create a view model based
             // on dynamic parameters (for example: the route parameters).
-            var viewModel = viewModelFactory(context, parameters, resources, element);
+            var viewModel = viewModelFactory(parameters, resources, element);
 
-            ensure(viewModel)._isViewModel("ViewModelBinder._getViewModel - \"viewModelFactory\" must return a valid view model.");
+            spa.ensure(viewModel)._isViewModel("ViewModelBinder._getViewModel - \"viewModelFactory\" must return a valid view model.");
 
             return viewModel;
         },
@@ -54,7 +54,7 @@
         },
 
         _cleanElement: function(element) {
-            ensure(element, "element", "ViewModelBinder._cleanElement").isDomElement();
+            gsoft.ensure(element, "element", "ViewModelBinder._cleanElement").isDomElement();
 
             // The trace call has been wrapped inside a check for "debug" mode because it involves extra processing
             // to compute the log message.
@@ -79,5 +79,4 @@
         }
     };
 })(jQuery,
-   gsoft.utils, 
-   gsoft.ensure);
+   gsoft.utils);

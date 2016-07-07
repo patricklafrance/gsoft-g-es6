@@ -1,4 +1,4 @@
-(function() {
+(function(utils) {
     ko.observable.fn.toString = function() {
         return "observable: " + ko.toJSON(this);
     };
@@ -12,7 +12,7 @@
     };
 
     ko.subscribable.fn.log = function() {
-        gsoft.utils.trace(this);
+        utils.trace(this);
 
         return this;
     };
@@ -23,9 +23,9 @@
         this.subscribe(function(newValue) {
             this._triggeredCount += 1;
 
-            gsoft.utils.trace("{0} {1} triggered with new value {2}".format(this._triggeredCount, name, newValue));
+            utils.trace(_.formatString("{0} {1} triggered with new value {2}", this._triggeredCount, name, newValue));
         }, this);
 
         return this;
     };
-})();
+})(gsoft.utils);

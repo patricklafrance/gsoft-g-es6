@@ -1,9 +1,20 @@
 // NOTE: The function documentation is based on the DOJO documentation: 
 // https://dojotoolkit.org/reference-guide/1.7/util/doctools/markup.html
 
-(function(utils) {
+(function() {
     "use strict";
     
+    var utils = null;
+
+    if (typeof module === "object") {
+        utils = require("gsoft").utils;
+    } 
+    else if (typeof window === "object") {
+        if (window.GSOFT_UNIT_TESTS === true) {
+            utils = window.gsoft.utils;
+        }
+    }
+
     // summary:
     //          Returns the number of items in the observable array.
     // returns:
@@ -144,4 +155,4 @@
             return !exist;
         });
     };
-})(gsoft.utils);
+})();
