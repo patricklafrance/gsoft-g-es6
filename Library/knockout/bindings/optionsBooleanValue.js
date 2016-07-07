@@ -6,7 +6,7 @@
             var value = valueAccessor();
 
             if (!ko.isObservable(value)) {
-                throw new g.ArgumentError("The \"optionsBooleanValue\" binding value must be an observable.");
+                throw new gsoft.ArgumentError("The \"optionsBooleanValue\" binding value must be an observable.");
             }
             
             return ko.applyBindingsToNode(element, { 

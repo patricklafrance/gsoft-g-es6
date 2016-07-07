@@ -7,7 +7,7 @@
     // errorMessage: String
     //         An error message that will be part of the exception message.
     gsoft.ArgumentError = function(errorMessage) {
-        this.message = utils.isNullOrEmpty(errorMessage) ? "ArgumentError" : "ArgumentError: \"{0}\"".format(errorMessage);
+        this.message = _.formatString(utils.isNullOrEmpty(errorMessage) ? "ArgumentError" : "ArgumentError: \"{0}\"", errorMessage);
     };
 
     gsoft.ArgumentError.prototype = new Error();
@@ -26,10 +26,10 @@
             this.message = "ArgumentNullError";
         }
         else if (utils.isNullOrEmpty(errorMessage)) {
-            this.message = "ArgumentNullError: \"{0}\" cannot be null".format(parameterName);
+            this.message = _.formatString("ArgumentNullError: \"{0}\" cannot be null", parameterName);
         }
         else {
-            this.message = "ArgumentNullError: \"{0}\"".format(errorMessage);
+            this.message = _.formatString("ArgumentNullError: \"{0}\"", errorMessage);
         }
     };
 
@@ -40,7 +40,7 @@
     // errorMessage: String
     //         An error message that will be part of the exception message.
     gsoft.InvalidOperationError = function(errorMessage) {
-        this.message = utils.isNullOrEmpty(errorMessage) ? "InvalidOperationError" : "InvalidOperationError: \"{0}\"".format(errorMessage);
+        this.message = _.formatString(utils.isNullOrEmpty(errorMessage) ? "InvalidOperationError" : "InvalidOperationError: \"{0}\"", errorMessage);
     };
 
     gsoft.InvalidOperationError.prototype = new Error();

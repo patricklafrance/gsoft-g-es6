@@ -7,7 +7,7 @@
             var disabledText = valueAccessor();
             
             if (ko.isObservable(disabledText)) {
-                throw new g.ArgumentError("The \"disabledText\" binding value cannot be an observable.");
+                throw new gsoft.ArgumentError("The \"disabledText\" binding value cannot be an observable.");
             }
             
             return ko.applyBindingsToNode(element, {
@@ -34,7 +34,7 @@
                 return ko.utils.unwrapObservable(disableBinding);
             }
                 
-            throw new g.ArgumentError("The \"disableText\" binding require that you specify the \"enable\" or \"disable\" binding.");
+            throw new gsoft.ArgumentError("The \"disableText\" binding require that you specify the \"enable\" or \"disable\" binding.");
         },
         
         _getEnabledText: function(element, allBindingsAccessor) {

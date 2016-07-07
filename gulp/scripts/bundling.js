@@ -9,14 +9,14 @@ var gulp = require("gulp");
 
 gulp.task("bundle-debug", function(callback) {
     sequence("bundle-core-scripts-debug", 
-             "bundle-core-widgets-scripts-debug",
+            //  "bundle-core-widgets-scripts-debug",
              "bundle-bindings-scripts-debug", 
-             "bundle-observable-array-scripts-debug", 
-             "bundle-debugging-scripts-debug", 
-             "bundle-spa-scripts-debug", 
-             "bundle-spa-es6-scripts-debug",
-             "bundle-spa-services-scripts-debug", 
-             "bundle-spa-typescript-scripts-debug",
+            //  "bundle-observable-array-scripts-debug", 
+            //  "bundle-debugging-scripts-debug", 
+            //  "bundle-spa-scripts-debug", 
+            //  "bundle-spa-es6-scripts-debug",
+            //  "bundle-spa-services-scripts-debug", 
+            //  "bundle-spa-typescript-scripts-debug",
              callback);
 });
 

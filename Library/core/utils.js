@@ -194,12 +194,15 @@
         
         // ---------------------------------
         
+        // ********* PROBLEM, gsoft.debug doesn't exist ANYMORE!!!!*************
+        // *********************************************************************
+
         // summary:
         //         Write a message to the console if debug is activated.
         // value(s): Object
         //         The value(s) to write to the console.
         trace: function(/* [value1], [value2], ... */) {
-            if (gsoft.debug === true && !this.isNull(console.log)) {
+            if (_.isDebug() && !this.isNull(console.log)) {
                 console.log.apply(console, arguments);
             }
         },
@@ -209,7 +212,7 @@
         // value(s): Object
         //         The value(s) to write to the console. The first value will be the value visible when the group is collapsed.
         groupTrace: function(values) {
-            if (gsoft.debug === true && !this.isNull(console.log) && !this.isNull(console.groupCollapsed) && !this.isNull(console.groupEnd)) {
+            if (_.isDebug() && !this.isNull(console.log) && !this.isNull(console.groupCollapsed) && !this.isNull(console.groupEnd)) {
                 if (!this.isNull(values)) {
                     if (values.length >= 1) {
                         console.groupCollapsed.apply(console, values[0]);
@@ -224,18 +227,6 @@
             }
         }
     };
-    
-    // ********  TO DELETE ****************** 
-
-    // if (!utils.isUndefined(Array.isArray) && !gsoft.forceShims) {
-    //     // The assertion is done with the native JavaScript Array object which support this feature 
-    //     // since the JavaScript 1.8.5 (ECMAScript 5) specifications.
-    //     utils.isArray = function(value) {
-    //         return Array.isArray(value);
-    //     };
-    // }
-
-    // ********  /TO DELETE ****************** 
     
     if (_.isBrowser()) {
         // summary:

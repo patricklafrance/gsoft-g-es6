@@ -16,7 +16,7 @@
         it("Set the image src when the value is a string", function() {
             var url = dataSampler.generateString(10);
             
-            containerElement.innerHTML = "<img data-bind=\"src: '{0}'\" />".format(url);
+            containerElement.innerHTML = `<img data-bind=\"src: '${url}'\" />`;
             
             ko.applyBindings({}, containerElement);
             
@@ -28,7 +28,7 @@
         it("Set the image src when the value is an observable", function() {
             var url = dataSampler.generateString(10);
             
-            containerElement.innerHTML = "<img data-bind=\"src: ko.observable('{0}')\" />".format(url);
+            containerElement.innerHTML = `<img data-bind=\"src: ko.observable('${url}')\" />`;
             
             ko.applyBindings({}, containerElement);
             

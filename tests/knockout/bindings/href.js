@@ -16,7 +16,7 @@
         it("Set the link href when the value is a string", function() {
             var url = dataSampler.generateString(10);
             
-            containerElement.innerHTML = "<a data-bind=\"href: '{0}'\"></a>".format(url);
+            containerElement.innerHTML = `<a data-bind=\"href: '${url}'\"></a>`;
             
             ko.applyBindings({}, containerElement);
             
@@ -28,7 +28,7 @@
         it("Set the link href when the value is an observable", function() {
             var url = dataSampler.generateString(10);
             
-            containerElement.innerHTML = "<a data-bind=\"href: ko.observable('{0}')\"></a>".format(url);
+            containerElement.innerHTML = `<a data-bind=\"href: ko.observable('${url}')\"></a>`;
             
             ko.applyBindings({}, containerElement);
             
@@ -38,7 +38,7 @@
         });
         
         it("When the value is an observable and the value change, update the link href", function() {
-            containerElement.innerHTML = "<a data-bind=\"href: $root.href\"></a>".format(url);
+            containerElement.innerHTML = "<a data-bind=\"href: $root.href\"></a>";
             
             var viewModel = {
                 href: ko.observable(dataSampler.generateString(10))

@@ -53,8 +53,14 @@
         var message = assertionMessage;
 
         if (utils.isNullOrEmpty(message)) {
-            message = defaultMessageTemplate.format(
-                utils.isNullOrEmpty(context) ? "" : "{0} - ".format(context),
+            message = _.formatString(defaultMessageTemplate,
+                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
+                utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
+        }
+
+        if (utils.isNullOrEmpty(message)) {
+            message = _.formatString(defaultMessageTemplate,
+                _.formatString(utils.isNullOrEmpty(context) ? "" : "{0} - ", context),
                 utils.isNullOrEmpty(parameterName) ? "Parameter" : parameterName);
         }
 

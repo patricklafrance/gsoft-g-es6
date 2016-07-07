@@ -27,7 +27,7 @@ gulp.task("dev", function(callback) {
         global.isVisualStudio = true;
     }
 
-    sequence("lint", "cs", "clean-scripts", "bundle-debug", callback);
+    sequence("lint", "cs", "clean-scripts", "bundle-debug", "jasmine-dev", callback);
 
     // sequence("lint", "cs", "clean-scripts", "bundle-debug", "exports-core-works", "jasmine-dev", callback);
 });

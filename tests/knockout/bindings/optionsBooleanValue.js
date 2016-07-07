@@ -17,7 +17,7 @@
             // Not sure why, but if I use real quotes, the options bindings doesn't render properly.
             var options = "[{&quot;text&quot;:&quot;Foo&quot;,&quot;value&quot;:&quot;true&quot;},{&quot;text&quot;:&quot;Bar&quot;,&quot;value&quot;:&quot;false&quot;}]";
             
-            containerElement.innerHTML = "<select id=\"foo\" data-bind=\"options: {0}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>".format(options);
+            containerElement.innerHTML = `<select id=\"foo\" data-bind=\"options: ${options}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>`
             
             var viewModel = {
                 value: ko.observable(false)
@@ -34,7 +34,7 @@
             // Not sure why, but if I use real quotes, the options bindings doesn't render properly.
             var options = "[{&quot;text&quot;:&quot;Foo&quot;,&quot;value&quot;:&quot;true&quot;},{&quot;text&quot;:&quot;Bar&quot;,&quot;value&quot;:&quot;false&quot;}]";
             
-            containerElement.innerHTML = "<select id=\"foo\" data-bind=\"options: {0}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>".format(options);
+            containerElement.innerHTML = `<select id=\"foo\" data-bind=\"options: ${options}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>`;
             
             var viewModel = {
                 value: ko.observable(false)
@@ -53,7 +53,7 @@
             // Not sure why, but if I use real quotes, the options bindings doesn't render properly.
             var options = "[{&quot;text&quot;:&quot;Foo&quot;,&quot;value&quot;:&quot;true&quot;},{&quot;text&quot;:&quot;Bar&quot;,&quot;value&quot;:&quot;false&quot;}]";
             
-            containerElement.innerHTML = "<select id=\"foo\" data-bind=\"options: {0}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>".format(options);
+            containerElement.innerHTML = `<select id=\"foo\" data-bind=\"options: ${options}, optionsText: 'text', optionsValue: 'value', optionsBooleanValue: $root.value\"></select>`;
             
             var viewModel = {
                 value: ko.observable(false)

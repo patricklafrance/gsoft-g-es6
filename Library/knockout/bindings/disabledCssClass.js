@@ -7,7 +7,7 @@
             var disabledCssClass = valueAccessor();
             
             if (ko.isObservable(disabledCssClass)) {
-                throw new g.ArgumentError("The \"disabledCssClass\" binding value cannot be an observable.");
+                throw new gsoft.ArgumentError("The \"disabledCssClass\" binding value cannot be an observable.");
             }
             
             var bindingsToApply = {
@@ -34,7 +34,7 @@
                 return ko.utils.unwrapObservable(disableBinding);
             }
                 
-            throw new g.ArgumentError("The \"disabledCssClass\" binding require that you specify the \"enable\" or \"disable\" binding.");
+            throw new gsoft.ArgumentError("The \"disabledCssClass\" binding require that you specify the \"enable\" or \"disable\" binding.");
         }
     };
 })();
