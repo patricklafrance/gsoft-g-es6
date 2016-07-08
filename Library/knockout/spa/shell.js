@@ -55,35 +55,6 @@
             return this._debug;
         },
         
-        // // summary:
-        // //         Register a service.
-        // // options: Object
-        // //         name: String
-        // //              A service name.
-        // //         factory: Function
-        // //              A factory to create an instance of the service. When the factory function is called, the shell will be provided as parameter.         
-        // registerService: function(options) {
-        //     gsoft.ensure(options, "options", "Shell.registerService").isObject();
-            
-        //     serviceRegistry.add(options.name, options.factory);
-        // },
-        
-        // // summary:
-        // //         Retrieve a service with the specified @name.
-        // // name: String
-        // //         A service name.
-        // // returns:
-        // //         A service.
-        // getService: function(name) {
-        //     var factory = serviceRegistry.find(name);
-            
-        //     if (utils.isNull(factory)) {
-        //         throw new gsoft.ArgumentError(_.formatString("Shell.getService - The service named {0} is not registered.", name));
-        //     }
-            
-        //     return factory(this);
-        // },
-        
         // summary:
         //         Register a page.
         // options: Object
@@ -356,63 +327,6 @@
 
             utils.trace(_.formatString("[SHELL] {0} is the 404 route.", routeUrl));
         },
-        
-        // // summary:
-        // //          Subscribe to a @channel. Everytime an event is published to that @channel 
-        // //          the @callback will be called with the event value.
-        // // channel: String
-        // //          A channel to suscribe to.
-        // // callback: Function
-        // //          An handler to call when an event is published on the @channel.
-        // // options: Object
-        // //          An optional object with options. Options can be:
-        // //             - priority: The subscriber priority. A subscriber with an higher will be notified
-        // //               before a subscriber with a lower priority.
-        // // returns:
-        // //         An object that contains informations about the subscription and a function to 
-        // //         unsuscribe from the @channel.
-        // subscribe: function() {
-        //     return mediator.subscribe.apply(mediator, arguments);
-        // },
-        
-        // // summary:
-        // //          Subscribe to a @channel for a single event. When the first event is published, the subscriber
-        // //          will be automatically unsubscribed from the @channel.
-        // // channel: String
-        // //          A channel to suscribe to.
-        // // callback: Function
-        // //          An handler to call when an event is published on the @channel.
-        // // options: Object
-        // //          An optional object with options. Options can be:
-        // //             - priority: The subscriber priority. A subscriber with an higher will be notified
-        // //               before a subscriber with a lower priority.
-        // // returns:
-        // //         An object that contains informations about the subscription and a function to 
-        // //         unsuscribe from the @channel.
-        // subscribeOnce: function() {
-        //     return mediator.subscribeOnce.apply(mediator, arguments);
-        // },
-        
-        // // summary:
-        // //          unsubscribe from a @channel.
-        // // channel: String
-        // //          A channel to unsubscribe from.
-        // // callback: Function
-        // //          A callback function that was specified when the subscription to the @channel
-        // //          was made.
-        // unsubscribe: function() {
-        //     mediator.unsubscribe.apply(mediator, arguments);
-        // },
-        
-        // // summary:
-        // //          Publish a @value to a @channel.
-        // // channel: String
-        // //          A channel to publish to.
-        // // value(s): Object
-        // //          The value(s) to publish on the @channel.
-        // publish: function() {
-        //     mediator.publish.apply(mediator, arguments);
-        // },
         
         // summary:
         //         Publish an error to the error channel of the mediator.

@@ -92,12 +92,10 @@ global.scripts.files.knockout.spa = {
         "library/knockout/spa/binders/composite.viewmodel.binder.js",
         "library/knockout/spa/binders/simple.viewmodel.binder.js",
         "library/knockout/spa/view.renderer.js",
-        // "library/knockout/spa/service.registry.js",
         "library/knockout/spa/shell.js",
-        // "library/knockout/spa/binding.action.js",
-        // "library/knockout/spa/page.viewmodel.js",
-        // "library/knockout/spa/page.context.js",
-        "library/knockout/spa/component.loader.js"
+        "library/knockout/spa/binding.action.js",
+        "library/knockout/spa/component.loader.js",
+        "library/knockout/spa/bootstrapper.js"
     ],
     fragments: {
         pre: ["library/knockout/spa/fragments/notes.js", "library/knockout/spa/fragments/export.js", "library/knockout/spa/fragments/intro.js"],

@@ -39,19 +39,16 @@ global.tests.specifications.knockout.spa = {
         "tests/knockout/spa/route.registry.js",
         "tests/knockout/spa/route.resolver.js",
         "tests/knockout/spa/router.js",
-        // "tests/knockout/spa/service.registry.js",
         "tests/knockout/spa/view.provider.js",
         "tests/knockout/spa/binders/composite.viewmodel.binder.js",
         "tests/knockout/spa/binders/simple.viewmodel.binder.js",
-        // "tests/knockout/spa/module.activator.js",
         "tests/knockout/spa/shell.js",
         "tests/knockout/spa/integration.simpleViewModelBinder.js",
         "tests/knockout/spa/integration.compositeViewModelBinder.js",
         "tests/knockout/spa/integration.withoutViewModelBinder.js",
         "tests/knockout/spa/integration.aliasjs",
         "tests/knockout/spa/integration.events.js",
-        // "tests/knockout/spa/binding.action.js",
-        // "tests/knockout/spa/page.viewmodel.js",
+        "tests/knockout/spa/binding.action.js",
         "tests/knockout/spa/component.loader.js"
     ]
 };
