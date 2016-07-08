@@ -3,8 +3,8 @@
 // Page view model
 // ---------------------------------
 
-(function($, utils) {
-    spa.viewModel = class ViewModel {
+return (function($, utils) {
+    return class ViewModel {
         // summary:
         //         When defined, the function will be called before applying the bindings.
         // returns:

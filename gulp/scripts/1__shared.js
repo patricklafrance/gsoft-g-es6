@@ -95,7 +95,7 @@ global.scripts.files.knockout.spa = {
         // "library/knockout/spa/service.registry.js",
         "library/knockout/spa/shell.js",
         // "library/knockout/spa/binding.action.js",
-        "library/knockout/spa/page.viewmodel.js",
+        // "library/knockout/spa/page.viewmodel.js",
         // "library/knockout/spa/page.context.js",
         "library/knockout/spa/component.loader.js"
     ],
@@ -121,7 +121,7 @@ global.scripts.files.knockout.spa.es6 = {
         "library/knockout/spa-es6/page.viewmodel.js"
     ],
     fragments: {
-        pre: ["library/knockout/spa-es6/fragments/notes.js", "library/knockout/spa-es6/fragments/intro.js"],
+        pre: ["library/knockout/spa-es6/fragments/notes.js", "library/knockout/spa-es6/fragments/export.js", "library/knockout/spa-es6/fragments/intro.js"],
         post: ["library/knockout/spa-es6/fragments/outro.js"]
     }
 };
