@@ -326,7 +326,7 @@
                         gsoft.spa.shell.registerPage({
                             url: routeUrl,
                             viewUrl: function() {
-                                return "{0}?bar=1".format(viewUrl);
+                                return `${viewUrl}?bar=1`;
                             }
                         });
 
@@ -357,7 +357,7 @@
                         gsoft.spa.shell.registerPage({
                             url: routeUrl,
                             viewUrl: function() {
-                                return "{0}?bar=1".format(viewUrl);
+                                return `${viewUrl}?bar=1`;
                             },
                             cacheView: true
                         });

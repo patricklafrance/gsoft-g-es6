@@ -24,7 +24,7 @@
             });
 
             it("Set HREF property to route URL", function() {
-                containerElement.innerHTML = "<a data-bind=\"action: { name: '{0}' }\"></a>".format(name);
+                containerElement.innerHTML = `<a data-bind=\"action: { name: '${name}' }\"></a>`;
 
                 ko.applyBindings({}, containerElement);
 
@@ -46,7 +46,7 @@
             it("Add an on click event to redirect to route URL ", function() {
                 spyOn(gsoft.utils.spa, "_navigate");
 
-                containerElement.innerHTML = "<button data-bind=\"action: { name: '{0}' }\"></button>".format(name);
+                containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}' }\"></button>`;
                 
                 ko.applyBindings({}, containerElement);
 
@@ -61,7 +61,7 @@
 
                 var delay = 10;
                 
-                containerElement.innerHTML = "<button data-bind=\"action: { name: '{0}', redirectDelay: {1} }\"></button>".format(name, delay);
+                containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}', redirectDelay: ${delay} }\"></button>`;
 
                 ko.applyBindings({}, containerElement);
 
@@ -81,7 +81,7 @@
 
                 var delay = ko.bindingHandlers.action._redirectDelay = 10;
                 
-                containerElement.innerHTML = "<button data-bind=\"action: { name: '{0}' }\"></button>".format(name);
+                containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}' }\"></button>`;
 
                 ko.applyBindings({}, containerElement);
 
@@ -99,7 +99,7 @@
             it("When the 'newWindow' parameter is specified, open url in a new window", function() {
                 spyOn(gsoft.utils.spa, "_openWindow");
 
-                containerElement.innerHTML = "<button data-bind=\"action: { name: '{0}', newWindow: true }\"></button>".format(name);
+                containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}', newWindow: true }\"></button>`;
                 
                 ko.applyBindings({}, containerElement);
 
@@ -118,21 +118,21 @@
                 param1 = dataSampler.generateString(10);
                 param2 = dataSampler.generateString(10);
 
-                gsoft.spa.shell.registerPage({ name: name, url: "{0}/:param1/:param2".format(url), viewUrl: dataSampler.generateString(10) });
+                gsoft.spa.shell.registerPage({ name: name, url: `${url}/:param1/:param2`, viewUrl: dataSampler.generateString(10) });
             });
 
             it("Can be non observable parameters", function() {
-                containerElement.innerHTML = "<a data-bind=\"action: { name: '{0}', parameters: { param1: '{1}', param2: '{2}' } }\"></a>".format(name, param1, param2);
+                containerElement.innerHTML = `<a data-bind=\"action: { name: '${name}', parameters: { param1: '${param1}', param2: '${param2}' } }\"></a>`;
 
                 ko.applyBindings({}, containerElement);
                 
                 var element = containerElement.getElementsByTagName("a")[0];
 
-                expect(element.getAttribute("href")).toBe("{0}/{1}/{2}".format(url, param1, param2));
+                expect(element.getAttribute("href")).toBe(`${url}/${param1}/${param2}`);
             });
 
             it("Can be observable parameters", function() {
-                containerElement.innerHTML = "<a data-bind=\"action: { name: '{0}', parameters: { param1: $root.param1, param2: $root.param2 } }\"></a>".format(name);
+                containerElement.innerHTML = `<a data-bind=\"action: { name: '${name}', parameters: { param1: $root.param1, param2: $root.param2 } }\"></a>`;
                 
                 var vm = {
                     param1: ko.observable(param1),
@@ -143,11 +143,11 @@
                 
                 var element = containerElement.getElementsByTagName("a")[0];
 
-                expect(element.getAttribute("href")).toBe("{0}/{1}/{2}".format(url, param1, param2));
+                expect(element.getAttribute("href")).toBe(`${url}/${param1}/${param2}`);
             });
 
             it("When an observable parameter value change, the route URL is updated", function() {
-                containerElement.innerHTML = "<a data-bind=\"action: { name: '{0}', parameters: { param1: $root.param1, param2: $root.param2 } }\"></a>".format(name);
+                containerElement.innerHTML = `<a data-bind=\"action: { name: '${name}', parameters: { param1: $root.param1, param2: $root.param2 } }\"></a>`;
 
                 var vm = {
                     param1: ko.observable(param1),
@@ -161,7 +161,7 @@
                 
                 var element = containerElement.getElementsByTagName("a")[0];
 
-                expect(element.getAttribute("href")).toBe("{0}/{1}/{2}".format(url, "foo", "bar"));
+                expect(element.getAttribute("href")).toBe(`${url}/foo/bar`);
             });
         });
 

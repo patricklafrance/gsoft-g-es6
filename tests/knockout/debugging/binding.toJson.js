@@ -30,7 +30,7 @@
             
             var element = containerElement.getElementsByTagName("pre")[0];
             
-            expect(removeEmptySpaces(element.innerHTML)).toBe("{\"prop\":\"{0}\"}".format(value));
+            expect(removeEmptySpaces(element.innerHTML)).toBe(`{\"prop\":\"${value}\"}`);
         });
         
         it("Set the JSON when the value is an observable", function() {
@@ -46,7 +46,7 @@
             
             var element = containerElement.getElementsByTagName("pre")[0];
             
-            expect(removeEmptySpaces(element.innerHTML)).toBe("{\"prop\":\"{0}\"}".format(value));
+            expect(removeEmptySpaces(element.innerHTML)).toBe(`{\"prop\":\"${value}\"}`);
         });
         
         it("Do nothing when the value is null", function() {

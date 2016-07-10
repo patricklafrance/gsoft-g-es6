@@ -7,7 +7,7 @@
             var aliasUrl = null;
 
             beforeEach(function() {
-                spyOn(gsoft.utils.spa, "_navigate");
+                spyOn(gsoft.spa.utils, "_navigate");
 
                 pageUrl = dataSampler.generateString(10);
                 aliasUrl = dataSampler.generateString(10);
