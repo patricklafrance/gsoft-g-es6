@@ -48,6 +48,7 @@ global.tests.specifications.knockout.spa = {
         "tests/knockout/spa/integration.withoutViewModelBinder.js",
         "tests/knockout/spa/integration.alias.js",
         "tests/knockout/spa/integration.events.js",
+        "tests/knockout/spa/integration.bootstrapping.js",
         "tests/knockout/spa/binding.action.js",
         "tests/knockout/spa/component.loader.js"
     ]
