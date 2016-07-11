@@ -8,7 +8,7 @@
         
         beforeEach(function() {
             helpers.ajax.install();
-            httpService = gsoft.spa.services.http(gsoft.spa.shell);
+            httpService = gsoft.spa.services.http;
         });
         
         afterEach(function() {
@@ -244,11 +244,11 @@
                 });
                 
                 describe("The mediator notification has", function() {
-                    it("gsoft.spa.Service.Http as source", function() {
+                    it("http-service as source", function() {
                         var hasSource = false;
                     
                         gsoft.mediator.subscribe(gsoft.spa.Channel.Error, function(error) {
-                            hasSource = error.source === gsoft.spa.Service.Http;
+                            hasSource = error.source === "http-service";
                         });
 
                         httpService.get({ 
@@ -515,11 +515,11 @@
             });
             
             describe("When the request failed", function() {
-                it("gsoft.spa.Service.Http as source", function() {
+                it("http-service as source", function() {
                     var hasSource = false;
 
                     gsoft.mediator.subscribe(gsoft.spa.Channel.Error, function(error) {
-                        hasSource = error.source === gsoft.spa.Service.Http;
+                        hasSource = error.source === "http-service";
                     });
 
                     httpService.post({ 
@@ -788,11 +788,11 @@
             });
             
             describe("When the request failed", function() {
-                it("gsoft.spa.Service.Http as source", function() {
+                it("http-service as source", function() {
                     var hasSource = false;
 
                     gsoft.mediator.subscribe(gsoft.spa.Channel.Error, function(error) {
-                        hasSource = error.source === gsoft.spa.Service.Http;
+                        hasSource = error.source === "http-service";
                     });
 
                     httpService.put({ 
@@ -1056,11 +1056,11 @@
             });
             
             describe("When the request failed", function() {
-                it("gsoft.spa.Service.Http as source", function() {
+                it("http-service as source", function() {
                     var hasSource = false;
 
                     gsoft.mediator.subscribe(gsoft.spa.Channel.Error, function(error) {
-                        hasSource = error.source === gsoft.spa.Service.Http;
+                        hasSource = error.source === "http-service";
                     });
 
                     httpService.remove({ 

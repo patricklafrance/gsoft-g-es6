@@ -17,7 +17,7 @@ gulp.task("jasmine", function(callback) {
          "bundle-spa-specifications",
          "bundle-spa-es6-scripts-for-tests",
          "bundle-spa-es6-specifications",
-        //  "bundle-spa-services-specifications",
+         "bundle-spa-services-specifications",
          "jasmine-core", 
         //  "jasmine-core-widgets",
          "jasmine-bindings", 
@@ -25,6 +25,6 @@ gulp.task("jasmine", function(callback) {
          "jasmine-debugging",
          "jasmine-spa", 
          "jasmine-spa-es6", 
-        //  "jasmine-spa-services", 
+         "jasmine-spa-services", 
          callback);
 });

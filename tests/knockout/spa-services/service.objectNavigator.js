@@ -7,7 +7,7 @@
         var objectNavigator = null;
 
 		beforeEach(function() {
-            objectNavigator = gsoft.spa.services.objectNavigator();
+            objectNavigator = new gsoft.spa.services.ObjectNavigator();
         });
 
         describe("traverse", function() {
