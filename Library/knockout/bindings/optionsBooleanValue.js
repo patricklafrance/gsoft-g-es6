@@ -1,4 +1,4 @@
-(function() {
+(function(utils) {
     // summary:
     //          Value binding that support options with boolean values as string.
     ko.bindingHandlers.optionsBooleanValue = {
@@ -14,14 +14,14 @@
                     read: function() {
                         var unwrappedValue = value();
 
-                        if (g.isNull(unwrappedValue)) {
+                        if (utils.isNull(unwrappedValue)) {
                             return null;
                         }
 
                         return unwrappedValue.toString();
                     },
                     write: function(newValue) {
-                        if (g.isNull(newValue)) {
+                        if (utils.isNull(newValue)) {
                             value(null);
                         } else {
                             value(newValue === "true");
@@ -31,4 +31,4 @@
             });
         }
     };
-})();
+})(gsoft.utils);

@@ -1,4 +1,18 @@
 (function(utils) {
+    // Caching the shift array prototype function give a small performance boost.
+    // This is used when manipulating function arguments. Since arguments is
+    // an "Array like" it doesn't implements the native array manipulation functions.
+    var shift = Array.prototype.shift;
+
+    function formatString() {
+        var args = arguments;
+        var format = shift.apply(args);
+
+        return format.replace(/\{(\d+)\}/g, function(m, n) {
+            return args[n];
+        });
+    }
+
     ko.observable.fn.toString = function() {
         return "observable: " + ko.toJSON(this);
     };
@@ -23,7 +37,7 @@
         this.subscribe(function(newValue) {
             this._triggeredCount += 1;
 
-            utils.trace(_.formatString("{0} {1} triggered with new value {2}", this._triggeredCount, name, newValue));
+            utils.trace(formatString("{0} {1} triggered with new value {2}", this._triggeredCount, name, newValue));
         }, this);
 
         return this;

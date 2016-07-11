@@ -1,7 +1,7 @@
 // Bootstrapper
 // ---------------------------------
 
-(function() {
+(function(mediator, shell) {
     spa.bootstrapper = {
         requireAll: function(context) {
             context.keys().forEach(context);
@@ -16,39 +16,64 @@
         },
 
         useApplicationRootRoute: function(route) {
-            spa.shell.setApplicationRootRoute(route);
+            shell.setApplicationRootRoute(route);
 
             return this;
         },
 
         use404Route: function(route) {
-            spa.shell.set404Route(route);
+            shell.set404Route(route);
 
             return this;
         },
 
         onError: function(callback, predicate) {
-            spa.shell.onError(callback, predicate);
+            shell.onError(callback, predicate);
 
             return this;
         },
 
         onPageChanging: function(callback, predicate) {
-            spa.shell.onPageChanging(callback, predicate);
+            shell.onPageChanging(callback, predicate);
 
             return this;
         },
 
         onPageChanged: function(callback, predicate) {
-            spa.shell.onPageChanged(callback, predicate);
+            shell.onPageChanged(callback, predicate);
+
+            return this;
+        },
+
+        onBeforeHttpRequest: function(callback) {
+            mediator.subscribe(spa.Channel.HttpBeforeRequest, function() {
+                callback.apply(null, arguments);
+            });
+
+            return this;
+        },
+
+        onHttpRequestSucceeded: function(callback) {
+            mediator.subscribe(spa.Channel.HttpRequestSucceeded, function() {
+                callback.apply(null, arguments);
+            });
+
+            return this;
+        },
+
+        onHttpRequestCompleted: function(callback) {
+            mediator.subscribe(spa.Channel.HttpRequestCompleted, function() {
+                callback.apply(null, arguments);
+            });
 
             return this;
         },
 
         start: function(options) {
-            spa.shell.start(options);
+            shell.start(options);
 
             return this;
         }
     };
-})();
+})(gsoft.mediator,
+   spa.shell);

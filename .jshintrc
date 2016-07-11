@@ -18,6 +18,6 @@
 		"jasmine", "describe", "it", "beforeEach", "afterEach", "expect", "spyOn", "jasmineReporters", "test",
         "gulp",
         "ko", "koViewModel", "Path",
-		"gsoft", "g", "_", "spa"
+		"gsoft", "g", "_", "spa", "services"
 	]
 }

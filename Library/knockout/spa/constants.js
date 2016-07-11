@@ -12,8 +12,9 @@
     spa.Channel = {
         Error: "g.spa.error",
         PageChanging: "g.spa.page-changing",
-        PageChanged: "g.spa.page-changed"
+        PageChanged: "g.spa.page-changed",
+        HttpBeforeRequest: "g-spa-http-before-request",
+        HttpRequestSucceeded: "g-spa-http-request-succeeded",
+        HttpRequestCompleted: "g-spa-http-request-completed"
     };
-
-    // gsoft.spa.Service = {};
 })();

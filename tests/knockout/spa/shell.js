@@ -76,56 +76,6 @@
             });
         });
         
-        describe("registerService", function() {
-            it("When the service options is not an object, throw an exception", function() {
-                expect(function() { gsoft.spa.shell.registerService(""); }).toThrow();
-                expect(function() { gsoft.spa.shell.registerService(null); }).toThrow();
-                expect(function() { gsoft.spa.shell.registerService(undefined); }).toThrow();
-            });
-            
-            describe("When this is a valid service", function() {
-                it("Add the service to the registry", function() {
-                    spyOn(gsoft.spa.serviceRegistry, "add");
-
-                    gsoft.spa.shell.registerService({
-                        name: dataSampler.generateString(10),
-                        factory: helpers.noop
-                    });
-
-                    expect(gsoft.spa.serviceRegistry.add).toHaveBeenCalled();
-                });
-                
-                it("Can register a service with the alias", function() {
-                    spyOn(gsoft.spa.serviceRegistry, "add");
-
-                    gsoft.spa.registerService({ name: dataSampler.generateString(10), factory: helpers.noop });
-
-                    expect(gsoft.spa.serviceRegistry.add).toHaveBeenCalled();
-                });
-            });
-        });
-        
-        describe("getService", function() {
-            it("When the service has not been registered, throw an exception", function() {
-                expect(function() { gsoft.spa.shell.getService(dataSampler.generateString(10)); }).toThrow();
-            });
-            
-            it("When the service has been registered, return a service instance", function() {
-                var serviceName = dataSampler.generateString(10);
-                var service = dataSampler.generateString(10);
-                
-                var factory = function() {
-                    return service;
-                };
-                
-                gsoft.spa.shell.registerService({ name: serviceName, factory: factory });
-                
-                var instance = gsoft.spa.shell.getService(serviceName);
-                
-                expect(instance).toBe(service);
-            });
-        });
-        
         describe("registerPage", function() {
             it("When the route is not an object, throw an exception", function() {
                 expect(function() { gsoft.spa.shell.registerPage(null); }).toThrow();

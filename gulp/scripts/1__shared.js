@@ -109,7 +109,7 @@ global.scripts.files.knockout.spa.services = {
         "library/knockout/spa-services/service.objectNavigator.js"
     ],
     fragments: {
-        pre: ["library/knockout/spa-services/fragments/notes.js", "library/knockout/spa-services/fragments/intro.js"],
+        pre: ["library/knockout/spa-services/fragments/notes.js", "library/knockout/spa-services/fragments/export.js", "library/knockout/spa-services/fragments/intro.js"],
         post: ["library/knockout/spa-services/fragments/outro.js"]
     }
 };

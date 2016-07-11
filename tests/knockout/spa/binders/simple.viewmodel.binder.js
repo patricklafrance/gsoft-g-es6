@@ -60,7 +60,7 @@
                     value: dataSampler.generateString(10)
                 };
 
-                var viewModelAccessor = function(context, viewModelParameters) {
+                var viewModelAccessor = function(viewModelParameters) {
                     if (helpers.areEquals(viewModelParameters, parameters)) {
                         works = true;
                     }
@@ -69,7 +69,7 @@
                 };
 
                 var binder = new gsoft.spa.SimpleViewModelBinder(viewModelAccessor);
-                binder.bind(document.createElement("div"), null, parameters);
+                binder.bind(document.createElement("div"), parameters);
 
                 expect(works).toBeTruthy();
             });
@@ -84,7 +84,7 @@
                 var containerElement = document.createElement("div");
                 containerElement.appendChild(firstChildElement);
 
-                var viewModelAccessor = function(context, viewModelParameters, resources) {
+                var viewModelAccessor = function(viewModelParameters, resources) {
                     if (dataResources === resources) {
                         works = true;
                     }
@@ -93,7 +93,7 @@
                 };
 
                 var binder = new gsoft.spa.SimpleViewModelBinder(viewModelAccessor);
-                binder.bind(containerElement, null, {});
+                binder.bind(containerElement, {});
 
                 expect(works).toBeTruthy();
             });

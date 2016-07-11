@@ -75,10 +75,14 @@
         registerPage: function(options) {
             gsoft.ensure(options, "options", "shell.registerPage").isObject();
             
+            if (utils.isNullOrEmpty(options.name)) {
+                options.name = options.url;
+            }
+
             if (!utils.isNull(options.aliases)) {
                 gsoft.ensure(options.aliases, "options.aliases", "Shell.aliases").isArray();
             }
-            
+
             this._addRoute({
                 name: options.name,
                 url: options.url,
@@ -110,10 +114,6 @@
             gsoft.ensure(options.viewUrl, "viewUrl").isTrue(function(x) { return !utils.isNullOrEmpty(x) || utils.isFunction(x); }, "Shell.registerPage viewUrl must be a non empty string or a function.");
             spa.ensure(options.viewModelBinder, "viewModelBinder", "Shell.registerPage")._isViewModelBinder();  
             // jscs:enable requireBlocksOnNewline
-            
-            if (utils.isNullOrEmpty(options.name)) {
-                options.name = options.url;
-            }
             
             if (utils.isNull(options.viewModelBinder)) {
                 if (utils.isFunction(options.viewModelFactory)) {

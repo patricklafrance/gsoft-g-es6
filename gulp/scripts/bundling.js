@@ -15,7 +15,7 @@ gulp.task("bundle-debug", function(callback) {
              "bundle-debugging-scripts-debug", 
              "bundle-spa-scripts-debug", 
              "bundle-spa-es6-scripts-debug",
-            //  "bundle-spa-services-scripts-debug", 
+             "bundle-spa-services-scripts-debug", 
             //  "bundle-spa-typescript-scripts-debug",
              callback);
 });

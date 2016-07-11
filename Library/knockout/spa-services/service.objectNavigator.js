@@ -2,7 +2,10 @@
 // ---------------------------------
 
 (function($, utils) {
-    gsoft.spa.Service.ObjectNavigator = "object-navigator";
+    // Caching the shift array prototype function give a small performance boost.
+    // This is used when manipulating function arguments. Since arguments is
+    // an "Array like" it doesn't implements the native array manipulation functions.
+    var shift = Array.prototype.shift;
 
     // We cannot use gsoft.utils.clonePlainObject because it doesn't copy functions
     // to the resulting object.
@@ -10,13 +13,22 @@
         return $.extend(true, {}, obj);
     }
 
-    var ObjectNavigator = function() {
+    function formatString() {
+        var args = arguments;
+        var format = shift.apply(args);
+
+        return format.replace(/\{(\d+)\}/g, function(m, n) {
+            return args[n];
+        });
+    }
+
+    services.ObjectNavigator = function() {
         this._current = null;
         this._options = null;
         this._context = null;
     };
     
-    ObjectNavigator.prototype = {
+    services.ObjectNavigator.prototype = {
         // summary:
         //         Traverse the specified @obj and call the specified handlers when objects, functions or primitive types are met.
         //         This object navigator is designed to support Knockout and can traverse and call handlers for observable properties.
@@ -155,14 +167,8 @@
                 return actualPath + newPart;
             }
             
-            return "{0}.{1}".format(actualPath, newPart);
+            return formatString("{0}.{1}", actualPath, newPart);
         }
-    };
-
-    // ---------------------------------
-
-    gsoft.spa.services.objectNavigator = function() {
-        return new ObjectNavigator();
     };
 })(jQuery,
    gsoft.utils);

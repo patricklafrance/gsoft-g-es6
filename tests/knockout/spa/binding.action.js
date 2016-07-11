@@ -44,7 +44,7 @@
             });
 
             it("Add an on click event to redirect to route URL ", function() {
-                spyOn(gsoft.utils.spa, "_navigate");
+                spyOn(gsoft.spa.utils, "_navigate");
 
                 containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}' }\"></button>`;
                 
@@ -53,11 +53,11 @@
                 var element = containerElement.getElementsByTagName("button")[0];
                 helpers.dom.triggerEvent(element, "click");
 
-                expect(gsoft.utils.spa._navigate).toHaveBeenCalledWith(url);
+                expect(gsoft.spa.utils._navigate).toHaveBeenCalledWith(url);
             });
 
             it("When a redirect delay is specified, defer redirect until the delay is over", function(done) {
-                spyOn(gsoft.utils.spa, "_navigate");
+                spyOn(gsoft.spa.utils, "_navigate");
 
                 var delay = 10;
                 
@@ -68,16 +68,16 @@
                 var element = containerElement.getElementsByTagName("button")[0];
                 helpers.dom.triggerEvent(element, "click");
 
-                expect(gsoft.utils.spa._navigate).not.toHaveBeenCalled();
+                expect(gsoft.spa.utils._navigate).not.toHaveBeenCalled();
 
                 setTimeout(function() {
-                    expect(gsoft.utils.spa._navigate).toHaveBeenCalledWith(url);
+                    expect(gsoft.spa.utils._navigate).toHaveBeenCalledWith(url);
                     done();
                 }, delay + 1);
             });
 
             it("When a default redirect delay is specified, defer redirect until the delay is over", function(done) {
-                spyOn(gsoft.utils.spa, "_navigate");
+                spyOn(gsoft.spa.utils, "_navigate");
 
                 var delay = ko.bindingHandlers.action._redirectDelay = 10;
                 
@@ -88,16 +88,16 @@
                 var element = containerElement.getElementsByTagName("button")[0];
                 helpers.dom.triggerEvent(element, "click");
                 
-                expect(gsoft.utils.spa._navigate).not.toHaveBeenCalled();
+                expect(gsoft.spa.utils._navigate).not.toHaveBeenCalled();
 
                 setTimeout(function() {
-                    expect(gsoft.utils.spa._navigate).toHaveBeenCalledWith(url);
+                    expect(gsoft.spa.utils._navigate).toHaveBeenCalledWith(url);
                     done();
                 }, delay + 1);
             });
 
             it("When the 'newWindow' parameter is specified, open url in a new window", function() {
-                spyOn(gsoft.utils.spa, "_openWindow");
+                spyOn(gsoft.spa.utils, "_openWindow");
 
                 containerElement.innerHTML = `<button data-bind=\"action: { name: '${name}', newWindow: true }\"></button>`;
                 
@@ -106,7 +106,7 @@
                 var element = containerElement.getElementsByTagName("button")[0];
                 helpers.dom.triggerEvent(element, "click");
                 
-                expect(gsoft.utils.spa._openWindow).toHaveBeenCalled();
+                expect(gsoft.spa.utils._openWindow).toHaveBeenCalled();
             });
         });
 

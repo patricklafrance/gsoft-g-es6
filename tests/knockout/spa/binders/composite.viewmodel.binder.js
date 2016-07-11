@@ -92,7 +92,7 @@
                 };
 
                 var binding = {
-                    viewModelFactory: function(context, viewModelParameters) {
+                    viewModelFactory: function(viewModelParameters) {
                         if (helpers.areEquals(viewModelParameters, parameters)) {
                             works = true;
                         }
@@ -105,7 +105,7 @@
                 };
 
                 var binder = new gsoft.spa.CompositeViewModelBinder([binding]);
-                binder.bind(document.createElement("div"), null, parameters);
+                binder.bind(document.createElement("div"), parameters);
 
                 expect(works).toBeTruthy();
             });

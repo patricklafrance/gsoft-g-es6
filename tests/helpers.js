@@ -77,7 +77,7 @@
             // Stringify excluded functions so we must do a property count to get more accurate results.
             return this.keys(expected).length === this.keys(actual).length && JSON.stringify(expected) === JSON.stringify(actual);
         },
-        
+
         dom: {
             getBodyElement: function() {
                 return document.getElementsByTagName("body")[0];

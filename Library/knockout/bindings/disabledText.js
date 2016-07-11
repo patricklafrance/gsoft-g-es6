@@ -1,4 +1,4 @@
-(function() {
+(function(utils) {
     // summary:
     //          Modify the inner HTML of the binding element when he is disabled. The binding element
     //          can be disabled with the "enable" or "disable" bindings.
@@ -47,7 +47,7 @@
             } else {
                 enabledText = ko.utils.domData.get(element, "enabledText");
                 
-                if (g.isNull(enabledText)) {
+                if (utils.isNull(enabledText)) {
                     enabledText = element.innerHTML;
                     ko.utils.domData.set(element, "enabledText", enabledText);
                 }
@@ -56,4 +56,4 @@
             return enabledText;
         }
     };
-})();
+})(gsoft.utils);
